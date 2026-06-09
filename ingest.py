@@ -39,8 +39,13 @@ def load_documents() -> list[dict]:
         {
             "doc_name":   str,   # filename stem, e.g. "cs_jobs"
             "source_url": str,   # the SOURCE_URL line at the top of the file
-            "text":       str,   # full document text (after the header line)
+            "doc_title":  str,   # extracted from [POST TITLE] line (empty if none)
+            "text":       str,   # clean prose only — structural labels stripped
         }
+
+    The [POST TITLE] and [POST BODY] labels are stripped from the text so that
+    chunking only operates on real content, never on label-only lines. The title
+    is preserved separately in "doc_title" for use as metadata.
 
     Files that cannot be read are skipped with a warning.
     """
@@ -58,22 +63,37 @@ def load_documents() -> list[dict]:
             log.warning("Could not read %s — %s", path.name, exc)
             continue
 
-        # Extract SOURCE_URL from the first line, then the rest is content
         lines = raw.splitlines()
         source_url = ""
         content_start = 0
 
         if lines and lines[0].startswith("SOURCE_URL:"):
             source_url = lines[0].removeprefix("SOURCE_URL:").strip()
-            # Skip the blank separator line after the header
-            content_start = 2
+            content_start = 2          # skip SOURCE_URL line + blank separator
 
-        text = "\n".join(lines[content_start:]).strip()
+        body_lines = lines[content_start:]
+
+        # ── Extract title & strip structural labels ────────────────────────
+        # [POST TITLE] and [POST BODY] are scraping artefacts. We pull the
+        # title out as metadata and remove both label lines so the chunker
+        # only sees clean prose — preventing label-only chunks.
+        doc_title = ""
+        clean_lines = []
+        for line in body_lines:
+            if line.startswith("[POST TITLE]"):
+                doc_title = line.removeprefix("[POST TITLE]").strip()
+            elif line.strip() == "[POST BODY]":
+                pass   # discard the label; the body text follows naturally
+            else:
+                clean_lines.append(line)
+
+        text = "\n".join(clean_lines).strip()
 
         docs.append({
-            "doc_name": path.stem,
+            "doc_name":   path.stem,
             "source_url": source_url,
-            "text": text,
+            "doc_title":  doc_title,
+            "text":       text,
         })
 
     log.info("Loaded %d document(s) from %s", len(docs), CLEAN_DIR)
