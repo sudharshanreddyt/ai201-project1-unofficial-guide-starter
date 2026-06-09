@@ -49,10 +49,14 @@ def embed_and_store(chunks: list[dict]) -> None:
     Each chunk must contain:
         "doc_name"    : str   -- document identifier (e.g. "cs_jobs")
         "chunk_index" : int   -- position within the document (0-based)
-        "text"        : str   -- the chunk content to embed
+        "text"        : str   -- the chunk content to embed (comments only)
 
-    Optionally, chunks may also contain:
-        "source_url"  : str   -- stored as metadata if present
+    Chunks produced by chunk_document() also carry:
+        "source_url"  : str   -- stored as metadata
+        "doc_title"   : str   -- stored as metadata
+        "post_body"   : str   -- original Reddit post body; stored as metadata
+                                 so the LLM has context without it polluting
+                                 retrieved chunk text.
 
     _collection.upsert() is used instead of .add() so that re-running
     ingestion never crashes with duplicate-ID errors — existing entries are
@@ -68,11 +72,10 @@ def embed_and_store(chunks: list[dict]) -> None:
     documents = [c["text"] for c in chunks]
     metadatas = [
         {
-            "doc_name":  c["doc_name"],
-            "doc_title": c.get("doc_title", ""),
-            # source_url is optional — chunks from chunk_document() don't
-            # include it, but callers that enrich chunks (e.g. app.py) may.
+            "doc_name":   c["doc_name"],
+            "doc_title":  c.get("doc_title",  ""),
             "source_url": c.get("source_url", ""),
+            "post_body":  c.get("post_body",  ""),
         }
         for c in chunks
     ]
@@ -93,9 +96,11 @@ def retrieve(query: str, n_results: int = N_RESULTS) -> list[dict]:
 
     Returns a list of dicts (sorted by relevance, best first):
         {
-            "text"       : str    -- chunk content
+            "text"       : str    -- chunk content (comments/replies only)
             "doc_name"   : str    -- source document name
+            "doc_title"  : str    -- post title
             "source_url" : str    -- original URL (empty string if not stored)
+            "post_body"  : str    -- original Reddit post body (metadata)
             "distance"   : float  -- cosine distance (lower = more similar)
         }
 
@@ -124,13 +129,15 @@ def retrieve(query: str, n_results: int = N_RESULTS) -> list[dict]:
     for doc, meta, dist in zip(docs, metas, dists):
         chunks.append({
             "text":       doc,
-            "doc_name":   meta.get("doc_name", ""),
-            "doc_title":  meta.get("doc_title", ""),
+            "doc_name":   meta.get("doc_name",   ""),
+            "doc_title":  meta.get("doc_title",  ""),
             "source_url": meta.get("source_url", ""),
+            "post_body":  meta.get("post_body",  ""),
             "distance":   dist,
         })
         log.debug("[%s] dist=%.3f  %s…", meta.get("doc_name"), dist, doc[:80])
 
+    print(chunks)
     return chunks
 
 
@@ -147,11 +154,9 @@ if __name__ == "__main__":
         all_chunks = []
 
         for doc in docs:
-            doc_chunks = chunk_document(doc["text"], doc["doc_name"])
-            # Enrich chunks with source_url and doc_title for metadata storage
-            for ch in doc_chunks:
-                ch["source_url"] = doc["source_url"]
-                ch["doc_title"]  = doc.get("doc_title", "")
+            # chunk_document now accepts the full doc dict and carries all
+            # metadata (source_url, doc_title, post_body) into every chunk.
+            doc_chunks = chunk_document(doc)
             all_chunks.extend(doc_chunks)
 
         log.info("Total chunks across %d documents: %d", len(docs), len(all_chunks))

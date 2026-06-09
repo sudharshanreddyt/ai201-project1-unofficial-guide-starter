@@ -88,11 +88,12 @@ If deploying this for thousands of real users without cost limits, a paid API mo
 
 | # | Question | Expected answer |
 |---|----------|-----------------|
-| 1 | What do students say about the pacing and rigor of early computer science classes at GWU? | Students describe the early computer science classes as challenging but manageable, with a focus on building strong foundational skills. |
-| 2 | Is the freshman housing lottery actually random, or does the placement matrix favor certain preferences? | The housing lottery is designed to be random, but the placement matrix may favor certain preferences based on student priorities and availability. |
-| 3 | What are the best strategies for navigating the high-stress course registration process at GWU? | Students recommend starting early, having a backup plan, and seeking advice from upperclassmen or academic advisors. |
-| 4 | What are the realistic pros and cons of living on the Mount Vernon campus versus Foggy Bottom dorms like Thurston Hall? | Living on Mount Vernon offers a more secluded environment with fewer distractions, while Foggy Bottom provides easier access to campus resources and social activities. |
-| 5 | What do students say about the quality and variety of food at GWU dining halls? | Students generally find the food quality to be good with a variety of options available, though some express concerns about pricing and wait times during peak hours. |
+| 1 | What do students say about the pacing and rigor of early computer science classes at GWU? | Students describe the early CS classes as challenging but survivable; they recommend checking Rate My Professor to scope out professors in advance, and note that smaller class sizes can be an advantage compared to large state schools. |
+| 2 | Is the freshman housing lottery actually random, or does the placement matrix favor certain preferences? | The lottery is effectively random — students should rank Foggy Bottom dorms first and Vern dorms last, but placement is not guaranteed. Room-swapping after the semester starts is the main fallback option. |
+| 3 | What are the best strategies for navigating the high-stress course registration process at GWU? | Pre-load all CRNs in a notes app or split-screen with the registration portal, register for UW (University Writing) courses first since they have the smallest sections, prepare multiple backup schedules, and consider using keyboard macros to speed up CRN entry. |
+| 4 | What are the realistic pros and cons of living on the Mount Vernon campus versus Foggy Bottom dorms like Thurston Hall? | Vern pros: quieter environment, forces healthy routines, sense of camaraderie among residents, chance at a single room. Vern cons: isolated, dependent on the VEX shuttle, no 24-hr library access. Foggy Bottom pros: central, walkable to classes and DC amenities, social energy. Foggy Bottom cons: louder, more cramped dorms. |
+| 5 | What do students say about the quality and variety of food at GWU dining halls? | Quality is described as "decent at best, borderline dangerous at worst" — mushy chicken, stale bread, undercooked rice, and cases of inedible materials have been reported. Freshman meal plans (~$3,000) are mandatory, removing student choice. Highlights include Thurston omelettes, Halal Shack, and the Indian place at USC as the better options. |
+
 
 ---
 
@@ -172,8 +173,8 @@ graph TD
 **Milestone 5 — Generation and interface:**
 - I will use Claude to help implement the generation stage and the Gradio interface. I will provide it with the Generation section of this planning document, along with the specific requirements for how the retrieved chunks should be synthesized into a coherent answer.
 
-- I expect Claude to produce two Python functions:
+- I expect Claude to produce the following:
    - generate_answer(retrieved_chunks) : that takes the retrieved chunks and uses the Groq Llama model to synthesize them into a coherent answer to the user's question.
-   - create_gradio_interface() : that sets up a Gradio interface for users to input their questions and receive generated answers.
-
+   -Also ask Claude to create a Gradio interface that can accept user input, and display generated answers.
+   
 - I will verify the output by testing the generation function with sample retrieved chunks to ensure that it produces coherent and relevant answers. I will also test the Gradio interface to confirm that it correctly accepts user input, triggers the retrieval and generation process, and displays the generated answers appropriately.
