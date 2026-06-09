@@ -1,0 +1,28 @@
+SOURCE_URL: https://www.reddit.com/r/gwu/comments/1dxy9a3/how_is_the_computer_science_at_gwu_incoming/
+
+[POST TITLE] How is the Computer Science at GWU? (Incoming Freshman)
+
+[POST BODY]
+Hi I am an incoming freshman into GWU (studying CS) and I was wondering how the CS program is like, and how the experience is as a whole.
+
+GWU has a cybersecurity program and scholarship that you might be interested in.
+
+Hello, I was wondering where I could get more information on that as I'm currently enrolled in '28 CS and would be interested in cyber security program as I have two certificates (Sec+ & Net+).
+
+IF you take CS at GWU, try to avoid Professor Aviv if you can.
+
+GW CS grad here - I enjoyed my time and did well professionally but looking at the current data and state of the industry I would strongly suggest considering math or another field in engineering. If you stick with CS, use Rate my Prof and see who your professors are. I'm sure the profs I had are not the ones you'll have. In my time there were some really brilliant/kind people in the department but also some real assholes, but nothing you cannot scope out in advance.
+
+I don’t think now is a good time to start in CS. If you already have a degree you’re not screwed or anything but programming jobs are being replaced by offshoring and AI and it will likely get worse. Unless Indian programmers get really expensive within your four years of college, I would recommend something trendier like data science or a classic like mathematics.
+
+Data science would restrict one to just data science. A CS student, on the other hand, can get data science roles very easily.
+
+I would agree that the most junior positions within CS are more competitive than they have ever been. People are really trying to use AI to automate everything, however, it will never work. The fundamental technologies behind AI aren't nearly as impressive as laypersons might think. AI tools like chatgpt make mistakes all the time. Once society weathers the storm of disillusionment, AI will just become a fad like crypto. In 4 years, CS skills will still be in demand. 4 years is a long time, trends in tech happen quickly, and LLM's are not a cure all. There will always be a need for programmers and even junior positions will exist in the future.
+
+AI is not like crypto because it’s broad, easy to understand, and can lead to real productivity. Basically all large white-collar firms like McKinsey, IBM, Apple, Shopify, Adobe, etc. are embedding AI into their products. They’re not going to invest millions into developing AI for iPhones and then abandon it in a few years. And users fundamentally enjoy the technology. We’re only two years into large scale AI usage so ofc systems like ChatGPT are still in their primitive stages, but this will improve as more data becomes available to train the AI. Either way, in the four year timeline AI won’t be the ones competing with CS graduates, that comes way down the line. The people competing with CS graduates are overseas coders who can do all the work for a quarter the cost and can work while the leadership at home is sleeping, leading to around the clock productivity. 20k in China or India would be considered a solid wage. If you paid that to someone in the US your workers will literally starve on the streets, if you have any at all.
+
+I think you fundamentally misunderstand the technology. AI has essentially peaked, and it would take a technological breakthrough to advance LLMs beyond their current capabilities. Right now all gains are incredibly marginal. The amount of training data required to create a functioning LLM is massive. The best LLMs today are trained on essentially all of the internet, which is why companies like Twitter and reddit are aggressively pushing to lock APIs behind paywalls--realizing the value of their user generated data. LLMs were being evaluated to see if there is a way to generate their own content and use that as training data, but that actually leads to decay within the model because of the current error rate. Overall, LLMs have no ability to "learn" beyond their current capabilities. It is easier to train a person who can actually grow, to do a task, knowing they they will need less supervision over time than review the work of an LLM. As far as offshoring, low skilled labor doesn't work in tech for the same reason that low quality LLMs don't work. Buggy tech doesn't sell, and so their will always be a need for high quality programmers within the field. Creating an operating system without security flaws isn't something you can outsource to the lowest bidder.
+
+So I should still do CS at GWU then?
+
+Ok but a similar dynamic applies to most white collar jobs with the advent of low latency internet.
