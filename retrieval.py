@@ -137,7 +137,15 @@ def retrieve(query: str, n_results: int = N_RESULTS) -> list[dict]:
         })
         log.debug("[%s] dist=%.3f  %s…", meta.get("doc_name"), dist, doc[:80])
 
-    print(chunks)
+    for ch in chunks:
+        print("doc_name: ", ch["doc_name"])
+        print("doc_title: ", ch["doc_title"])
+        print("source_url: ", ch["source_url"])
+        print("post_body: ", ch["post_body"])
+        print("distance: ", ch["distance"])
+        print("text: ", ch["text"])
+        print("\n--------------------------------------------------------------------------\n")
+
     return chunks
 
 

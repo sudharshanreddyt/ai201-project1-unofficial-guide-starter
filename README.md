@@ -67,7 +67,7 @@ The Unofficial GWU Freshman Computer Science Student Survival Guide.
      Include:
      - Chunk size (characters or tokens) and why that size fits your documents
      - Overlap size and why (or why not) you used overlap
-     - Any preprocessing you did before chunking (e.g., stripping HTML, removing headers)
+     - Any preprocessing you did before chunking (e.g., stripping HTML, removing headers) -->
 
 **Chunk size: 500**
 The 500-character chunk size allows for capturing complete thoughts and advice without splitting sentences or key information across chunks. This is particularly important for Reddit posts, which often contain multiple paragraphs of advice and discussion. A smaller chunk size might split important context, while a larger chunk size could make retrieval less precise.
@@ -95,7 +95,7 @@ The scraper (`scraper.py`) and ingestion pipeline (`ingest.py`) apply the follow
 **Why these choices fit your documents:**
 The 500-character chunk size with 100-character overlap is effective for Reddit posts because it preserves the conversational context of discussions, ensures that nuanced advice and anecdotes are not cut off mid-sentence, and handles the variability in post length while maintaining sufficient context for retrieval accuracy.
 
-**Final chunk count:** 138
+**Final chunk count:** 109
 
 **5 labeled sample chunks with their source document name**
 
